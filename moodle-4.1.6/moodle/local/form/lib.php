@@ -23,16 +23,30 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
+/**
+ * Insert a link to index.php on the site front page navigation menu.
+ *
+ * @param navigation_node $frontpage Node representing the front page in the navigation tree.
+ */
 
-$string['pluginname'] = 'Form'; 
-$string['firstname'] = 'First Name';
-$string['lastname'] = 'Last Name';
-$string['username'] = 'Username';
-$string['email'] = 'Email';
-$string['submit'] = 'Submit';
-$string['required'] = 'This field is required.';
-$string['toolong'] = 'Username must be 7 characters or fewer.';
-$string['uppercase'] = 'Username must be in uppercase.';
-$string['invalidemail'] = 'Invalid email address.';
-$string['invalidemail'] = 'Invalid email address or domain.';
-$string['alloweddomains'] = 'Allowed domains (comma-separated)';
+if (isloggedin() && !isguestuser()) {
+    function local_form_extend_navigation_frontpage(navigation_node $frontpage) {
+        $frontpage->add(
+            get_string('pluginname', 'local_form'),
+            new moodle_url('/local/form/index.php')
+        );
+    }
+
+    function local_form_extend_navigation(global_navigation $root) {
+        $node = navigation_node::create(
+            get_string('pluginname', 'local_form'),
+            new moodle_url('/local/form/index.php'),
+            navigation_node::TYPE_CUSTOM,
+            null,
+            null,
+            new pix_icon('t/message', '')
+        );
+        $node->showinflatnavigation = true;
+        $root->add_node($node);
+    }
+}
