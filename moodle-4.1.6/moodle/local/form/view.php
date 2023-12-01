@@ -26,10 +26,8 @@
  require_once('../../config.php');
 require_once('form.php');
 
-// Убедимся, что пользователь авторизован (или укажите необходимые условия для доступа)
 require_login();
 
-// Установка контекста и заголовка страницы
 $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->set_url('/local/form/view.php');
@@ -39,11 +37,10 @@ $PAGE->set_heading('View Feedback Form Data');
 
 echo $OUTPUT->header();
 
-// SQL-запрос для извлечения данных из таблицы mdl_local_form
-$sql = "SELECT * FROM {local_form}"; // Предполагается, что ваша таблица называется local_form
+
+$sql = "SELECT * FROM {local_form}"; 
 $data = $DB->get_records_sql($sql);
 
-// Проверка наличия данных
 if (!empty($data)) {
     echo '<h2>Feedback Form Data</h2>';
     echo '<table border="1">';

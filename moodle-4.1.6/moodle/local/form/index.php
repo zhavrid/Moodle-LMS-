@@ -48,18 +48,56 @@ if ($form->is_cancelled()) {
     // Сохраняем данные в базу данных
     $DB->insert_record('local_form', $record);
 
-    // Вывод данных из формы
+    $arr = array(
+        'properties' => array(
+            array(
+                'property' => 'email',
+                'value' => $data->email
+            ),
+            array(
+                'property' => 'firstname',
+                'value' => $data->firstname
+            ),
+            array(
+                'property' => 'lastname',
+                'value' => $data->lastname
+            )
+        )
+    );
+    
+    $post_json = json_encode($arr);
+    
+    $hapikey = 'pat-eu1-f0287396-1d2f-4e05-bb1f-eb78094cff6a';
+    $endpoint = 'https://api.hubapi.com/contacts/v1/contact/';
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_json);
+    curl_setopt($ch, CURLOPT_URL, $endpoint);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $hapikey
+    ));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    
+    $response = curl_exec($ch);
+    $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curl_errors = curl_error($ch);
+    
+    curl_close($ch);
+    
+    echo "curl Errors: " . $curl_errors;
+    echo "\nStatus code: " . $status_code;
+    echo "\nResponse: " . $response;    
+
     echo $OUTPUT->header();
     echo "<p><strong>First Name:</strong> {$data->firstname}</p>";
     echo "<p><strong>Last Name:</strong> {$data->lastname}</p>";
     echo "<p><strong>Username:</strong> {$data->username}</p>";
     echo "<p><strong>Email:</strong> {$data->email}</p>";
 
-
-
     echo $OUTPUT->footer();
 } else {
-    // Вывод формы для заполнения
     echo $OUTPUT->header();
     $form->display();
     echo $OUTPUT->footer();
