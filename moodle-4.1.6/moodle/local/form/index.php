@@ -37,7 +37,6 @@ $form = new local_form_form();
 if ($form->is_cancelled()) {
     redirect(new moodle_url('/'));
 } else if ($data = $form->get_data()) {
-    // Данные формы были отправлены, обрабатываем их
     $record = new stdClass();
     $record->firstname = $data->firstname;
     $record->lastname = $data->lastname;
@@ -45,7 +44,20 @@ if ($form->is_cancelled()) {
     $record->email = $data->email;
     $record->timemodified = time();
 
-    // Сохраняем данные в базу данных
+    $existing_user = $DB->get_record('local_form', array('username' => $data->username));
+
+    if ($existing_user) {
+        // обновляю last_login перед увеличением login_count
+        $existing_user->timemodified = $record->timemodified;
+        $existing_user->last_login = $existing_user->timemodified; 
+        $existing_user->login_count += 1;
+        $DB->update_record('local_form', $existing_user);
+    } else {
+        $record->login_count = 1;
+        $record->last_login = $record->timemodified;
+        $DB->insert_record('local_form', $record);
+    }
+
     $DB->insert_record('local_form', $record);
 
     $arr = array(
