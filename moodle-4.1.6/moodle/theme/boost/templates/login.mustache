@@ -43,8 +43,14 @@
             <div id="region-main-box" class="col-12">
                 <section id="region-main" class="col-12 h-100" aria-label="{{#str}}content{{/str}}">
                 <div class="login-wrapper">
+                    <div class="login-image">
+                        <img src="//moodle/moodle-4.1.6/moodle/pluginfile.php/1/theme_boost/loginbackgroundimage/1701776968/shutterstock_1709385436-scaled.avif">
+                    </div>
                     <div class="login-container">
-                    {{{ output.main_content }}}
+                        {{{ output.main_content }}}
+                        <button type="button" class="eye" id="eye">
+                            <img src="https://cdn0.iconfinder.com/data/icons/feather/96/eye-16.png" alt="eye" />
+                        </button>
                     </div>
                 </div>
                 </section>
@@ -61,4 +67,36 @@ M.util.js_pending('theme_boost/loader');
 require(['theme_boost/loader'], function() {
   M.util.js_complete('theme_boost/loader');
 });
+
+    function togglePassword() {
+        var passwordField = document.getElementById("password");
+        var currentType = passwordField.getAttribute("type");
+        passwordField.setAttribute("type", currentType === "text" ? "password" : "text");
+    }
+
+
+
+function show() {
+    var p = document.getElementById('password');
+    p.setAttribute('type', 'password');
+}
+
+function hide() {
+    var p = document.getElementById('password');
+    p.setAttribute('type', 'text');
+}
+
+var pwShown = 0;
+
+document.getElementById("eye").addEventListener("click", function () {
+    if (pwShown == 0) {
+        pwShown = 1;
+        show();
+    } else {
+        pwShown = 0;
+        hide();
+    }
+}, false);
+
+
 {{/js}}

@@ -3698,7 +3698,7 @@ pre code {
 .col-auto, .col-12, .col-11, .col-10, .col-9, .col-8, .col-7, .col-6, .col-5, .col-4, .col-3, .col-2, .col-1 {
   position: relative;
   width: 100%;
-  padding-right: 15px;
+  /* padding-right: 15px; */
   padding-left: 15px;
 }
 
@@ -10571,10 +10571,10 @@ button.bg-dark:focus {
   padding: 2rem !important;
 }
 
-.pt-5,
+/* .pt-5,
 .py-5 {
   padding-top: 2rem !important;
-}
+} */
 
 .pr-5,
 .px-5 {
@@ -22438,13 +22438,11 @@ textarea[data-auto-rows] {
   background-repeat: repeat-x;
 }
 .pagelayout-login #page div[role=main] {
-  height: 100%;
-}
+  height: 100%;}
 
 .login-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: right;
   height: 100%;
 }
 

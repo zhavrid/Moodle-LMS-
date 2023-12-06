@@ -14,8 +14,6 @@ $login-identity-provider-btn-border: $border-color !default;
 }
 
 .pagelayout-login #page {
-    background: $loginbackground-gradient-from;
-    @include gradient-x($loginbackground-gradient-from, $loginbackground-gradient-to, 0%, 100%);
     div[role="main"] {
         height: 100%;
     }
@@ -23,16 +21,32 @@ $login-identity-provider-btn-border: $border-color !default;
 
 .login-wrapper {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: right;
     height: 100%;
+}
+.eye{
+    position: absolute;
+    top: 180px;
+    right: 100px;
+}
+.eye_img{
+    width: 30px;
+}
+
+@media screen and (max-width: 786px) {
+    .login-image{
+        display: none;
+    }
+    .login-wrapper {
+        display: flex;
+        justify-content: center;
+        height: 100%;
+    }
 }
 
 .login-container {
     background-color: $logincontainer-bg;
     padding: $logincontainer-padding;
-    box-shadow: $logincontainer-shadow;
-    margin-bottom: 2rem;
     .login-languagemenu {
         display: flex;
         justify-content: flex-start;
@@ -74,11 +88,27 @@ $login-identity-provider-btn-border: $border-color !default;
             margin: 0.5rem 0;
         }
     }
+
+    .btn-primary {
+        color: white;
+        background-color: rgb(208, 149, 66);
+        border-color: #873c39;
+        width: 100%;
+    }
+
 }
+
+.form-control .form-control-lg::before {
+    content: url('https://cdn.icon-icons.com/icons2/629/PNG/512/eye-visible-outlined-interface-symbol_icon-icons.com_57844.png');
+}
+
 
 @include media-breakpoint-up(md) {
     .login-container {
         max-width: 600px;
+        border-radius: 0;
         @include border-radius();
     }
 }
+
+

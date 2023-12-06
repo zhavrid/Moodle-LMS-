@@ -3647,7 +3647,7 @@ pre code {
 .container-md,
 .container-sm {
   width: 100%;
-  padding-right: 15px;
+  /* padding-right: 15px; */
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
@@ -3698,7 +3698,7 @@ pre code {
 .col-auto, .col-12, .col-11, .col-10, .col-9, .col-8, .col-7, .col-6, .col-5, .col-4, .col-3, .col-2, .col-1 {
   position: relative;
   width: 100%;
-  padding-right: 15px;
+  /* padding-right: 15px; */
   padding-left: 15px;
 }
 
@@ -5382,8 +5382,9 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #0f6cbf;
-  border-color: #0f6cbf;
+  background-color: rgb(208, 149, 66);
+  border-color: #873c39;
+  width: 100%;
 }
 .btn-primary:hover {
   color: #fff;
@@ -10567,19 +10568,19 @@ button.bg-dark:focus {
   padding-left: 1.5rem !important;
 }
 
-.p-5 {
+/* .p-5 {
   padding: 2rem !important;
-}
+} */
 
-.pt-5,
+/* .pt-5,
 .py-5 {
   padding-top: 2rem !important;
-}
+} */
 
-.pr-5,
+/* .pr-5,
 .px-5 {
   padding-right: 2rem !important;
-}
+} */
 
 .pb-5,
 .py-5 {
@@ -22433,26 +22434,43 @@ textarea[data-auto-rows] {
 }
 
 .pagelayout-login #page {
-  background: #f8f9fa;
-  background-image: linear-gradient(to right, #f8f9fa 0%, #dee2e6 100%);
   background-repeat: repeat-x;
 }
 .pagelayout-login #page div[role=main] {
   height: 100%;
+  width: 420px;
 }
 
+.eye{
+  position: absolute;
+  top: 180px;
+  right: 100px;
+}
+
+.eye_img{
+  width: 30px;
+}
 .login-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: right;
   height: 100%;
+}
+@media screen and (max-width: 786px) {
+  .login-wrapper {
+      display: flex;
+      justify-content: center;
+      height: 100%;
+  }
 }
 
 .login-container {
   background-color: #fff;
   padding: 3rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  margin-bottom: 2rem;
+}
+@media screen and (max-width: 786px) {
+  .login-image{
+      display: none;
+  }
 }
 .login-container .login-languagemenu {
   display: flex;
@@ -22492,7 +22510,7 @@ textarea[data-auto-rows] {
 
 @media (min-width: 768px) {
   .login-container {
-    max-width: 600px;
+    width: 100%;
     border-radius: 0.5rem;
   }
 }
